@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate ETH Transaction Graph</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 50px;
+      max-width: 500px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generate Ethereum Graph</h1>
+  <form action="/generate-graph" method="POST">
+    <label for="startBlock">Start Block Number:</label><br>
+    <input type="number" id="startBlock" name="start_block" required style="margin-bottom: 15px;"><br>  
+    
+    <label for="minEdgeVal">Minimum Transaction Value:</label><br>  
+    <input type="number" id="minEdgeVal" name="min_edge_val" step="any" required style="margin-bottom: 15px;"><br>    
+  
+    <button type="submit">Generate Graph</button>
+  </form>
+  
+
+</body>
+</html>
