@@ -109,5 +109,6 @@ def visualize_graph(G: nx.Graph, df: pd.DataFrame, rpc_url: str, output_html: st
       }
     }
     """)
-
+    
+    os.makedirs(os.path.dirname(output_html), exist_ok=True)
     net.write_html(output_html, open_browser=False, notebook=True)
