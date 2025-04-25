@@ -34,6 +34,9 @@ def visualize_graph(G: nx.Graph, df: pd.DataFrame, rpc_url: str, output_html: st
     values = np.array(list(balances.values()))
     min_size, max_size = 50, 500
 
+    # Apply log scaling
+    values = np.log1p(values)  # log(1 + x) to handle zero balances safely
+
     if values.max() != values.min():
         scaled = ((values - values.min()) / (values.max() - values.min())) * (max_size - min_size) + min_size
     else:
@@ -78,12 +81,14 @@ def visualize_graph(G: nx.Graph, df: pd.DataFrame, rpc_url: str, output_html: st
                 shadow=True
             )
         else:
-            cluster = partition.get(node, 0)
+            cluster = partition.get(node, 0)  
+            color = cluster_colors.get(cluster, "#cccccc")  
             net.add_node(
                 node,
                 label=node[:6],
                 title=title,
-                size=size
+                size=size,
+                color=color  
             )
 
     for u, v, data in G_filtered.edges(data=True):

@@ -6,28 +6,76 @@
   <style>
     body {
       font-family: sans-serif;
-      margin: 50px;
+      margin: 50px auto;
       max-width: 500px;
+      text-align: center; 
+    }
+    form {
+      display: flex;
+      flex-direction: column; /* 🧹 Stack form items vertically */
+      align-items: center; /* Center items horizontally */
+      gap: 20px; /* 🧹 Add space between form elements */
+      margin-top: 30px;
     }
     input, button {
-      padding: 10px;
+      padding: 12px;
       font-size: 16px;
-      margin-top: 10px;
+      width: 100%; 
+      max-width: 400px; /* Slightly narrower input fields */
+      box-sizing: border-box;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    #spinner {
+      display: none;
+      margin-top: 40px;
+      text-align: center;
+    }
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
   <h1>Generate Ethereum Graph</h1>
-  <form action="/generate-graph" method="POST">
-    <label for="startBlock">Start Block Number:</label><br>
-    <input type="number" id="startBlock" name="start_block" required style="margin-bottom: 15px;"><br>  
-    
-    <label for="minEdgeVal">Minimum Transaction Value:</label><br>  
-    <input type="number" id="minEdgeVal" name="min_edge_val" step="any" required style="margin-bottom: 15px;"><br>    
   
+  <form action="/generate-graph" method="POST" onsubmit="showSpinner()">
+    <div>
+      <label for="startBlock">Start Block Number:</label><br>
+      <input type="number" id="startBlock" name="start_block" required>
+    </div>
+
+    <div>
+      <label for="minEdgeVal">Minimum Transaction Value:</label><br>
+      <input type="number" id="minEdgeVal" name="min_edge_val" step="any" required>
+    </div>
+
     <button type="submit">Generate Graph</button>
   </form>
-  
+
+  <!-- Spinner -->
+  <div id="spinner">
+    <div class="loader"></div>
+    <p>Generating graph... please wait!</p>
+  </div>
+
+  <script>
+    function showSpinner() {
+      document.getElementById('spinner').style.display = 'block';
+    }
+  </script>
 
 </body>
 </html>
